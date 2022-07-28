@@ -54,7 +54,6 @@ export class StocksService {
 
     async removeFromList(symbol) {
 
-        console.log({ symbol })
         const index = stocks.findIndex(stock => stock.symbol.toLowerCase() === symbol.toLowerCase());
 
         if (index === -1) {

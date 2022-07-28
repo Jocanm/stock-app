@@ -9,7 +9,7 @@ export class HttpService {
             try {
                 https.get(url, (res) => {
 
-                    console.log(`statusCode: ${res.statusCode}`);
+                    // console.log(`statusCode: ${res.statusCode}`);
 
                     res.on('error', (err) => {
                         console.log("error", err)
@@ -25,7 +25,7 @@ export class HttpService {
                     res.on('end', () => {
                         try {
                             const serverData = JSON.parse(Buffer.concat(data).toString());
-                            console.log({ serverData })
+                            // console.log({ serverData })
                             resolve(serverData);
                         } catch (error) {
                             console.log("error", error)

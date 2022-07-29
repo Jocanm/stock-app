@@ -15,7 +15,7 @@ export class StocksService {
     }
 
     async getAllData() {
-        return JSON.stringify([...stocks]);
+        return JSON.stringify(stocks);
     }
 
     async getCompanyData(symbol) {
@@ -41,9 +41,22 @@ export class StocksService {
                 symbol: quotesData?.symbol,
             }
 
+            const stock = this._getStockFromList(symbol);
             this._addNewCompany(companyData);
 
-            return JSON.stringify(companyData);
+            if (!stock) {
+
+                return {
+                    data: companyData,
+                    inList: false,
+                }
+
+            } else {
+                return {
+                    data: companyData,
+                    inList: true,
+                }
+            }
 
         } catch (error) {
             console.log("error", error)
@@ -78,6 +91,10 @@ export class StocksService {
 
         this._writeDataToFile('./utils/data/data.json', stocks);
 
+    }
+
+    _getStockFromList(symbol) {
+        return stocks.find(stock => stock.symbol.toLowerCase() === symbol.toLowerCase());
     }
 
     _addNewCompany(data) {

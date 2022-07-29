@@ -19,6 +19,18 @@ const routeWithParams = /^\/api\/stocks\/[a-zA-Z]{1,9}$/
 const server = http.createServer(
     (req, res) => {
 
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'DELETE, PUT, POST, GET, OPTIONS');
+        // res.setHeader('Access-Control-Allow-Headers', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.setHeader('Access-Control-Request-Method', '*');
+
+        if ( req.method === 'OPTIONS' ) {
+            res.writeHead(200);
+            res.end();
+            return;
+        }
+
         const { url, method } = req;
 
         if (url === '/api/seed') {
@@ -28,27 +40,27 @@ const server = http.createServer(
         else if (url.match(routeWithParams) && method === 'POST') {
 
             const symbol = url.split('/')[3];
-            stockController.addNewCompany(req, res, symbol);
+            stockController.addStock(req, res, symbol);
         }
 
         else if (url === "/api/stocks/all" && method === 'GET') {
 
-            stockController.getAllData(req, res);
+            stockController.getStocks(req, res);
         }
 
         else if (url.match(routeWithParams) && method === 'DELETE') {
             const symbol = url.split('/')[3];
-            stockController.deleteCompany(req, res, symbol);
+            stockController.deleteStock(req, res, symbol);
         }
 
         else if (url.match(routeWithParams) && method === 'PUT') {
             const symbol = url.split('/')[3];
-            stockController.getUpdatedCompanyData(req, res, symbol);
+            stockController.updateStock(req, res, symbol);
         }
 
         else {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('404 Not Found');
+            res.writeHead(404, { 'Content-Type': 'text/json' });
+            res.end(JSON.stringify({ error: 'Not found' }));
         }
 
     }

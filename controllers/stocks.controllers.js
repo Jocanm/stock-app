@@ -19,20 +19,20 @@ export class StocksController {
 
     //DESC   add new company to list
     //ROUTE  POST api/stocks/:symbol
-    async addNewCompany(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
+    async addStock(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
 
         try {
 
-            const companyData = await this._stocksService.getCompanyData(symbol)
+            const respuesta = await this._stocksService.getCompanyData(symbol)
 
-            if (!companyData) {
+            if (!respuesta?.data) {
 
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end(JSON.stringify({ error: 'Company not found' }));
             } else {
 
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(companyData);
+                res.end(JSON.stringify(respuesta));
             }
 
         } catch (error) {
@@ -45,7 +45,7 @@ export class StocksController {
 
     //DESC   get all Stocks saved
     //ROUTE  GET api/stocks/all
-    async getAllData(req = http.IncomingMessage, res = http.ServerResponse) {
+    async getStocks(req = http.IncomingMessage, res = http.ServerResponse) {
 
         const allStocks = await this._stocksService.getAllData();
 
@@ -55,8 +55,8 @@ export class StocksController {
     }
 
     //DESC   delete company from list
-    //ROUTE  DELETE api/stocks/:symbol
-    async deleteCompany(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
+    //ROUTE  DELETE api/stocks/:name
+    async deleteStock(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
 
         try {
 
@@ -81,19 +81,19 @@ export class StocksController {
 
     //DESC   get updated company data and update the list
     //ROUTE  GET api/stocks/:symbol
-    async getUpdatedCompanyData(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
+    async updateStock(req = http.IncomingMessage, res = http.ServerResponse, symbol) {
 
-        const companyData = await this._stocksService.getCompanyData(symbol)
+        const respuesta = await this._stocksService.getCompanyData(symbol)
 
-        if (!companyData) {
+        if (!respuesta?.data) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             res.end(JSON.stringify({ error: 'Company not found' }));
         }
 
-        await this._stocksService.updateData(JSON.parse(companyData));
+        await this._stocksService.updateData(respuesta.data);
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(companyData);
+        res.end(JSON.stringify(respuesta.data));
     }
 
 }

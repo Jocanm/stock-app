@@ -5,8 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test/index.test.js"
-  },
-  "devDependencies": {}
+    "start": "node backend/index.js",
+    "test": "node backend/test/index.test.js"
+  }
 }

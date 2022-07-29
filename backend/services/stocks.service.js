@@ -11,7 +11,7 @@ export class StocksService {
     }
 
     async resetStocks() {
-        this._writeDataToFile('./utils/data/data.json', []);
+        this._writeDataToFile('./backend/utils/data/data.json', []);
     }
 
     async getAllData() {
@@ -75,7 +75,7 @@ export class StocksService {
 
         stocks.splice(index, 1);
 
-        this._writeDataToFile('./utils/data/data.json', stocks);
+        this._writeDataToFile('./backend/utils/data/data.json', stocks);
 
         return { notFound: false, }
 
@@ -89,7 +89,7 @@ export class StocksService {
 
         stocks[index] = data;
 
-        this._writeDataToFile('./utils/data/data.json', stocks);
+        this._writeDataToFile('./backend/utils/data/data.json', stocks);
 
     }
 
@@ -106,7 +106,7 @@ export class StocksService {
 
         stocks.push(data);
 
-        this._writeDataToFile('./utils/data/data.json', stocks);
+        this._writeDataToFile('./backend/utils/data/data.json', stocks);
     }
 
     _writeDataToFile(fileName, data) {

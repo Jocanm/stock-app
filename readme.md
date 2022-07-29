@@ -1,7 +1,7 @@
 ## Stocks Backend
 ---
 
-#### Para Ejecutar la aplicación en local (Puerto 5000)
+#### Para Ejecutar el backend en local (Puerto 5000)
 ```bash
     npm start
 ```
@@ -23,5 +23,11 @@
 
 ### Detalles
 
-1. El historial de busqueda se guardara en un archivo JSON ubicado en ./utils/data/data.json.
+1. El historial de busqueda se guardara en un archivo JSON ubicado en ./backend/utils/data/data.json.
 2. Para correr el proyecto correctamente por primera vez, el archivo .json mencionado anteriormente, debe contener un array vacio, donde se almacenará el historial de busqueda del usuario.
+
+
+## Stocks Frontend
+---
+
+### Para ejecutar la aplicación del lado del frontend, solo deberá abrir el archivo frontend/index.html en el navegador

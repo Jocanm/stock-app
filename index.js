@@ -33,7 +33,7 @@ const server = http.createServer(
 
         const { url, method } = req;
 
-        if (url === '/api/seed') {
+        if (url === '/api/seed' && method === 'POST') {
             stockController.seedData(req, res);
         }
 

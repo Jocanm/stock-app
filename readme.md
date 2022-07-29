@@ -1,12 +1,16 @@
 ## Stocks Backend
 ---
 
-#### Para Correr el proyecto
+#### Para Ejecutar la aplicación en local (Puerto 5000)
 ```bash
     npm start
 ```
 
-#### El proyecto correrá autmaticamente en el puerto 5000
+#### Para correr los tests
+```bash
+    npm test
+```
+
 ---
 
 ### Rutas habilitadas

@@ -6,7 +6,7 @@
     npm start
 ```
 
-#### Para correr los tests
+#### Correr Lost Test (Se debe usar la versión 18+ de node.js)
 ```bash
     npm test
 ```
